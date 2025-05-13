@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= event.name %> | EventNest</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #e50914;
+            --dark-red: #b20710;
+            --black: #000000;
+            --dark-gray: #1a1a1a;
+            --light-gray: #f5f5f5;
+            --card-bg: rgba(30, 30, 30, 0.9);
+        }
+        
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('/homebg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: var(--light-gray);
+        }
+        
+        .container {
+            max-width: 800px;
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .event-header {
+            border-bottom: 3px solid var(--primary-red);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .event-details {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .detail-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        strong {
+            color: var(--primary-red);
+            font-weight: 600;
+            display: inline-block;
+            min-width: 120px;
+        }
+        
+        .btn-back {
+            background-color: var(--dark-gray);
+            color: white;
+            border: 1px solid var(--primary-red);
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+        
+        .btn-back:hover {
+            background-color: var(--primary-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .event-details {
+                padding: 1.5rem;
+            }
+            
+            strong {
+                min-width: 100px;
+                display: block;
+                margin-bottom: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="event-header">
+            <h1 class="text-danger mb-3"><i class="fas fa-calendar-alt me-2"></i><%= event.name %></h1>
+        </div>
+        
+        <div class="event-details">
+            <div class="detail-item">
+                <p><strong><i class="fas fa-calendar-day me-2"></i>Date:</strong> <%= event.date %></p>
+            </div>
+            
+            <div class="detail-item">
+                <p><strong><i class="fas fa-map-marker-alt me-2"></i>Venue:</strong> <%= event.venue %></p>
+            </div>
+            
+            <div class="detail-item">
+                <p><strong><i class="fas fa-align-left me-2"></i>Description:</strong></p>
+                <p><%= event.description %></p>
+            </div>
+            
+            <% if (event.rules) { %>
+                <div class="detail-item">
+                    <p><strong><i class="fas fa-gavel me-2"></i>Rules:</strong></p>
+                    <p><%= event.rules %></p>
+                </div>
+            <% } %>
+        </div>
+
+        <a href="/index" class="btn btn-back">
+            <i class="fas fa-arrow-left me-2"></i>Back to Events
+        </a>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

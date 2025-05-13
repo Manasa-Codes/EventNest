@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listings | EventNest</title>
+
+
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    :root {
+        --primary-red: #e50914;
+        --dark-red: #b20710;
+        --dark-bg: #141414;
+        --light-text: #f5f5f5;
+        --gray-text: #999;
+    }
+    
+    body {
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(index.jpeg);
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Poppins', sans-serif;
+        color: var(--light-text);
+    }
+    
+    .eventnest-logo {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 3.5rem;
+        color: var(--primary-red);
+        letter-spacing: 3px;
+        margin-left: 2rem;
+        margin-top: 1.5rem;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        transition: all 0.3s ease;
+    }
+    
+    .eventnest-logo:hover {
+        transform: scale(1.05);
+    }
+    
+    .post-btn {
+        background-color: var(--primary-red);
+        border: none;
+        padding: 0.6rem 1.5rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+    }
+    
+    .post-btn:hover {
+        background-color: var(--dark-red);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+    }
+    
+    .search-container {
+        max-width: 800px;
+        margin: 2rem auto;
+    }
+    
+    .search-input {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--light-text);
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .search-input:focus {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.3);
+        border-color: var(--primary-red);
+    }
+    
+    .search-btn {
+        background-color: var(--primary-red);
+        border: none;
+        padding: 0 1.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .search-btn:hover {
+        background-color: var(--dark-red);
+    }
+    
+    .event-card {
+        background: rgba(20, 20, 20, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--light-text);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        height: 100%;
+    }
+    
+    .event-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        border-color: rgba(229, 9, 20, 0.3);
+    }
+    
+    .card-title {
+        font-weight: 600;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        color: white;
+        border-bottom: 2px solid var(--primary-red);
+        padding-bottom: 0.5rem;
+    }
+    
+    .card-text {
+        margin-bottom: 0.8rem;
+        font-weight: 300;
+    }
+    
+    .card-text strong {
+        color: var(--primary-red);
+        font-weight: 500;
+    }
+    
+    .event-date {
+        display: inline-block;
+        background-color: rgba(229, 9, 20, 0.2);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .no-events {
+        text-align: center;
+        padding: 4rem;
+        color: var(--gray-text);
+        font-size: 1.2rem;
+    }
+    
+    .events-container {
+        padding-bottom: 4rem;
+    }
+    
+    @media (max-width: 768px) {
+        .eventnest-logo {
+            font-size: 2.5rem;
+            margin-left: 1rem;
+        }
+        
+        .search-container {
+            padding: 0 1rem;
+        }
+    }
+</style>
+
+
+</head>
+
+<body>
+    <!-- Header with Logo and Post Button -->
+    <header class="d-flex justify-content-between align-items-center px-4 mt-3">
+        <div class="eventnest-logo">EventNest</div>
+        <div class="ms-auto">
+            <a href="/event" class="btn post-btn">
+                <i class="fas fa-plus me-2"></i>Post an Event
+            </a>
+        </div>
+    </header>
+
+
+<!-- Search Bar -->
+<div class="search-container">
+    <form method="GET" action="/search">
+        <div class="input-group">
+            <input type="text" name="query" class="form-control search-input" placeholder="Search events by name, venue or description..." required>
+            <button class="btn search-btn" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Events List -->
+<div class="container events-container">
+         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <% events.forEach(event => { %>
+                <div class="col">
+                    <div class="card shadow event-card h-100">
+                        <div class="card-body p-4">
+                            <a href="/events/<%= event._id %>" style="text-decoration: none; color: inherit;">
+                                <h5 class="card-title"><%= event.name %></h5>
+                                <span class="event-date">
+                                    <i class="fas fa-calendar-day me-2"></i><%= event.date %>
+                                </span>
+                                <p class="card-text">
+                                    <strong><i class="fas fa-map-marker-alt me-2"></i>Venue:</strong> 
+                                    <%= event.venue %>
+                                </p>
+                                <p class="card-text">
+                                    <strong><i class="fas fa-info-circle me-2"></i>Details:</strong> 
+                                    <%= event.description %>
+                                </p>
+                            </a>
+            
+                            <% if (session.isAdmin) { %>
+                                <form action="/delete-event/<%= event._id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                                    <button type="submit" class="btn btn-danger mt-2">
+                                        <i class="fas fa-trash-alt me-1"></i> Delete
+                                    </button>
+                                </form>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+            
+         </div>
+          
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>    
