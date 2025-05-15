@@ -15,6 +15,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+
 app.use((req, res, next) => {
     res.locals.session = req.session;  // makes session available to all EJS templates
     next();
@@ -89,7 +90,7 @@ app.post('/login', async (req, res) => {
         if (!isMatch) {
             return res.status(400).send("Invalid credentials");
         }
-
+        req.session.isAdmin = false;
         res.redirect('/index'); // ✅ Authenticated successfully
     } catch (err) {
         console.error(err);
